@@ -1,0 +1,17 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+ 
+        <!-- base tiles layout add -->
+ 
+ <!-- 전체(base) 템플릿 -->
+        <definition name="*" template="/WEB-INF/views/layout/base.jsp">
+                <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+        </definition>
+ 
+ <!-- admin 템플릿 -->
+        <definition name="admin/*" template="/WEB-INF/views/layout/admin.jsp">
+                <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+        </definition>
+
+</tiles-definitions>
