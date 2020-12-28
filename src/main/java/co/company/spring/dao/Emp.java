@@ -2,6 +2,8 @@ package co.company.spring.dao;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +18,7 @@ public class Emp {
 	String firstName;
 	String lastName;
 	String email;	
-//	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss") // 사용자 지정 형식으로 변환
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // 사용자 지정 형식으로 변환
 	@JsonFormat(shape = Shape.STRING) //ISO-8601 형식으로 변환
 	Date hireDate;	
 	String jobId;	

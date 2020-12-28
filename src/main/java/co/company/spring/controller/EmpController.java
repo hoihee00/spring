@@ -16,43 +16,43 @@ import org.springframework.web.servlet.ModelAndView;
 
 import co.company.spring.dao.Dept;
 import co.company.spring.dao.Emp;
-import co.company.spring.dao.EmpMapper;
 import co.company.spring.dao.EmpSearch;
 import co.company.spring.dao.Jobs;
+import co.company.spring.emp.service.EmpService;
 
 @Controller
 public class EmpController {
 	@Autowired
-	EmpMapper dao;
+	EmpService service;
 	
 	@ModelAttribute("jobs")
 	public List<Jobs> jobs() {
-		return dao.jobSelect();
+		return service.jobSelect();
 	}
 	
 	@ModelAttribute("dept")
 	public List<Dept> dept() {
-		return dao.deptSelect();
+		return service.deptSelect();
 	}
 
 	@RequestMapping("/ajax/jobSelect")
 	@ResponseBody
 	public List<Jobs> jobSelect() {
-		return dao.jobSelect();
+		return service.jobSelect();
 	}
 	
 	@RequestMapping(value = "/empSelect", method = RequestMethod.GET)
 	public ModelAndView select(EmpSearch emp) {
 		ModelAndView mav = new ModelAndView();
 		// 조회
-		mav.addObject("list", dao.getEmpList(emp));
+		mav.addObject("list", service.getEmpList(emp));
 		mav.setViewName("emp/select");
 		return mav;
 	}
 
 	@GetMapping("/empUpdateForm") 
 	public String updateForm(Model model, Emp emp) {
-		model.addAttribute("emp", dao.getEmp(emp));
+		model.addAttribute("emp", service.getEmp(emp));
 		return "emp/insert"; // forward
 	}
 	
@@ -68,9 +68,9 @@ public class EmpController {
 			return "emp/insert";
 		}
 		if(emp.getEmployeeId() == null)
-			dao.insertEmp(emp);
+			service.insertEmp(emp);
 		else
-			dao.updateEmp(emp);
+			service.updateEmp(emp);
 //		request.setAttribute("emp", emp);
 		return "emp/insertOutput";
 	}
